@@ -3,7 +3,7 @@ jaggery-fiber
 
 #Defining an Extension
 
-```javascript
+```json
   {
     "name":"myextension",
     "version":"1.0.0",

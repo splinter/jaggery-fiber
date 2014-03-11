@@ -7,5 +7,7 @@ jaggery-fiber
   {
     "name":"myextension",
     "version":"1.0.0",
+    "main":"main.js",
+    "dependecies":[ "assetService"]
   }
 ```

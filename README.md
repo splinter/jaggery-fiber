@@ -9,8 +9,8 @@ The fiber script will look scan a directory to check if it contains an extension
   {
     "name":"myextension",
     "version":"1.0.0",
-    "description":"This is an extension to show how to set one up"
+    "description":"This is an extension to show how to set one up",
     "main":"main.js",
-    "dependecies":[ "assetService"]
+    "consumes":["a","b"]
   }
 ```

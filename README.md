@@ -39,7 +39,7 @@ There are two types of  components that can be deployed by users;
 
 ```javascript
   var fiber=require('fiber');
-  fiber.components.register('myComponent',function(context,handlers){
+  fiber.components('myComponent',function(context,handlers){
       handlers(); //Make sure to invoke the other handlers
   });
 ```
@@ -48,7 +48,7 @@ There are two types of  components that can be deployed by users;
 
 ```javascript
   var fiber=require('fiber');
-  fiber.components.register('errHandler', function(err,context,handlers){
+  fiber.components('errHandler', function(err,context,handlers){
        handlers(err); //Allow other error handlers to process the request
   });
 ```

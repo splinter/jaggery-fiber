@@ -18,7 +18,7 @@ Fiber creates a virtual model of your application when it is initializes and all
 
 ```javascript
   var fiber=require('fiber');
-  fiber.app.init(function(context){
+  fiber.app(function(context){
       //Any initialization logic for your app
   });
 ```

@@ -1,0 +1,6 @@
+<module name="fiber" xmlns="http://wso2.org/projects/jaggery/module.xml">
+    <script>
+        <name>fiber.js</name>
+        <path>scripts/core/fiber.js</path>
+    </script>
+</module>

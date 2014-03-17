@@ -39,7 +39,7 @@ There are two types of  components that can be deployed by users;
 
 ```javascript
   var fiber=require('fiber');
-  fiber.components('myComponent',function(context,handlers){
+  fiber.app.component('myComponent',function(context,handlers){
       handlers(); //Make sure to invoke the other handlers
   });
 ```
@@ -48,7 +48,7 @@ There are two types of  components that can be deployed by users;
 
 ```javascript
   var fiber=require('fiber');
-  fiber.components('errHandler', function(err,context,handlers){
+  fiber.app.component('errHandler', function(err,context,handlers){
        handlers(err); //Allow other error handlers to process the request
   });
 ```
@@ -59,7 +59,7 @@ Components can be connected together to form a chain of execution that transform
 ```javascript
   var fiber=require('fiber');
   var data={};
-  fiber.component.chain('myComponent').
+  fiber.app.components().chain('myComponent').
                   chain('errHandler').
                   resolve(data,req,res,session);
 ```
@@ -67,7 +67,7 @@ Components can be connected together to form a chain of execution that transform
 There is also two other syntax types that are supported by fiber;
 
 ```javascript
-  fiber.component.chain(function(context,handlers){
+  fiber.app.components().chain(function(context,handlers){
         //Some logic
   }).
   chain('myComponent').
@@ -77,7 +77,7 @@ There is also two other syntax types that are supported by fiber;
 
 You can defin multiple components in one line using;
 ```javascript
-  fiber.component.chain('myComponent,errHandler').resolve(data,req,res,session);
+  fiber.app.components.chain('myComponent,errHandler').resolve(data,req,res,session);
 ```
 
 ####Running some logic at the end of a chain
@@ -85,7 +85,7 @@ You can defin multiple components in one line using;
 You will often want to run some piece of logic at the end of a component chain.Fiber allows this through the finally method;
 
 ```javascript
-  fiber.component.chain('myComponent').
+  fiber.app.components.chain('myComponent').
                   chain('errHandler').
                   finally(function(context,req,res,session){
                   }).

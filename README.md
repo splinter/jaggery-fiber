@@ -59,7 +59,7 @@ Components can be connected together to form a chain of execution that transform
 ```javascript
   var fiber=require('fiber');
   var data={};
-  fiber.app.components().chain('myComponent').
+  fiber.app.components.chain('myComponent').
                   chain('errHandler').
                   resolve(data,req,res,session);
 ```
@@ -67,7 +67,7 @@ Components can be connected together to form a chain of execution that transform
 There is also two other syntax types that are supported by fiber;
 
 ```javascript
-  fiber.app.components().chain(function(context,handlers){
+  fiber.app.components.chain(function(context,handlers){
         //Some logic
   }).
   chain('myComponent').

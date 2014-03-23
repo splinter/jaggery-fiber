@@ -306,6 +306,8 @@ var app = {};
 
         var component = container.serviceMap.get(componentName);
 
+        //log.info('Adding component: '+component);
+
         if (!component) {
             log.warn('Component: ' + componentName + ' could not be found.');
             return null;

@@ -13,9 +13,9 @@ var app = {};
     var EXTENSION_CONFIG = 'package.json';
     var utils = require('utils');
     var log = new Log();
-    var TYPE_STRING='string';
-    var TYPE_OBJECT='object';
-    var TYPE_FUNCTION='function';
+    var TYPE_STRING = 'string';
+    var TYPE_OBJECT = 'object';
+    var TYPE_FUNCTION = 'function';
 
     /**
      * The class defines the structure of the application
@@ -126,6 +126,8 @@ var app = {};
      */
     var recursiveInitPackages = function (pack) {
         //log.info('Pack: ' + stringify(pack));
+
+        requireMain(pack);
         requireFiles(pack);
         if (!pack) {
             return;
@@ -177,6 +179,22 @@ var app = {};
             file = pack._meta.require[index];
             require(pack._path + '/' + file);
             log.info('requiring: ' + pack._path + '/' + file);
+        }
+
+    };
+
+    /**
+     * The function is used to require any files defined as the main property
+     * @param pack The pack to be initialized
+     */
+    var requireMain = function (pack) {
+        //Check if the main property has been provided
+        var main = pack._meta.main;
+
+
+        if (main) {
+            log.info('Requiring main: ' + pack._path + '/' + main);
+            require(pack._path + '/' + main);
         }
 
     };

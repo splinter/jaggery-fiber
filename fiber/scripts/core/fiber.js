@@ -258,15 +258,23 @@ var app = {};
      *                   If a function is provided it is directly plugged into the pipe chain
      * @returns A reference to this object to allow the user to chain function calls
      */
-    ComponentContainer.prototype.chain = function (components) {
+    ComponentContainer.prototype.chain = function (components,options) {
         var type = typeof components;
         //Component string
         if (type == TYPE_STRING) {
             components = components.split(',');
-            locateComponents(components, this);
+
+            //Determine if it is a single component
+            if(components.length==1){
+                locateComponent(components[0],this,options);
+            }
+            else{
+                locateComponents(components, this);
+            }
+
         }
         else if ((type == TYPE_FUNCTION) || (type == TYPE_OBJECT)) {
-            this.pipe.plug(components);
+            this.pipe.plug(components,options);
         }
         else {
             log.warn('The component type ' + type + ' cannot be plugged into the chain');
@@ -302,7 +310,7 @@ var app = {};
      * @param componentName The name of the component to be located
      * @param container  The fiber application
      */
-    var locateComponent = function (componentName, container) {
+    var locateComponent = function (componentName, container,options) {
 
         var component = container.serviceMap.get(componentName);
 
@@ -313,7 +321,7 @@ var app = {};
             return null;
         }
         else {
-            container.pipe.plug(component);
+            container.pipe.plug(component,options);
         }
     };
 

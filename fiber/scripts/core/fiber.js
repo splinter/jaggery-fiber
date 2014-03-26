@@ -81,12 +81,16 @@ var app = {};
      * @param packMap
      */
     var recursiveRegisterPackages = function (rootDir, packMap, path) {
+
         var dirs = utils.file.getAllSubDirs(rootDir);
+
+        //Record the package
+        packMap[rootDir.getName()] = {};//This is required to support packages which may be in nested directories
 
 
         if (isPackage(rootDir)) {
             //Record the package
-            packMap[rootDir.getName()] = {};
+            //packMap[rootDir.getName()] = {};
             packMap[rootDir.getName()]._path = path;
             packMap[rootDir.getName()]._meta = require(path + '/' + EXTENSION_CONFIG);
         }
@@ -174,6 +178,12 @@ var app = {};
      * @param pack The package to be processed
      */
     var requireFiles = function (pack) {
+
+        if(!pack._meta){
+            log.warn('pack: '+stringify(pack)+' not a package.');
+            return;
+        }
+
         var file;
         for (var index in pack._meta.require) {
             file = pack._meta.require[index];
@@ -188,6 +198,12 @@ var app = {};
      * @param pack The pack to be initialized
      */
     var requireMain = function (pack) {
+
+        if(!pack._meta){
+            log.warn('pack: '+stringify(pack)+' not a package.');
+            return;
+        }
+
         //Check if the main property has been provided
         var main = pack._meta.main;
 

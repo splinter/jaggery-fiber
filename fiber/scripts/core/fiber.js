@@ -180,7 +180,7 @@ var app = {};
     var requireFiles = function (pack) {
 
         if(!pack._meta){
-            log.warn('pack: '+stringify(pack)+' not a package.');
+            //log.warn('pack: '+stringify(pack)+' not a package.');
             return;
         }
 
@@ -188,7 +188,7 @@ var app = {};
         for (var index in pack._meta.require) {
             file = pack._meta.require[index];
             require(pack._path + '/' + file);
-            log.info('requiring: ' + pack._path + '/' + file);
+            //log.info('requiring: ' + pack._path + '/' + file);
         }
 
     };
@@ -200,7 +200,7 @@ var app = {};
     var requireMain = function (pack) {
 
         if(!pack._meta){
-            log.warn('pack: '+stringify(pack)+' not a package.');
+            //log.warn('pack: '+stringify(pack)+' not a package.');
             return;
         }
 
@@ -209,7 +209,7 @@ var app = {};
 
 
         if (main) {
-            log.info('Requiring main: ' + pack._path + '/' + main);
+            //log.info('Requiring main: ' + pack._path + '/' + main);
             require(pack._path + '/' + main);
         }
 

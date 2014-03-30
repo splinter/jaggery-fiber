@@ -318,6 +318,13 @@ var app = {};
      * @param session
      */
     ComponentContainer.prototype.resolve = function (data, req, res, session) {
+        var server=data['_server']={};
+        server.css=[];
+        server.js=[];
+        server.font=[];
+        server.img=[];
+        
+        data['_page']={};
         this.pipe.resolve(data, req, res, session);
     };
 

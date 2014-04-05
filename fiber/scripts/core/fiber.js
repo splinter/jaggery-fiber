@@ -318,7 +318,11 @@ var app = {};
      * @param session
      */
     ComponentContainer.prototype.resolve = function (data, req, res, session) {
-        var app=data['_app']={};
+        var meta=data['_']={};
+        meta['app']={};
+        meta['page']={};
+        var app=meta.app;
+
         app.css=[];
         app.js=[];
         app.publicDir={};
@@ -327,7 +331,6 @@ var app = {};
         app.publicDir.font=[];
         app.publicDir.img=[];
         
-        data['_page']={};
         this.pipe.resolve(data, req, res, session);
     };
 

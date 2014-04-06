@@ -31,11 +31,6 @@ var app = {};
         })
         //this.components = new ComponentContainer(this.componentsMap);
     }
-
-    Fiber.prototype.getNewComponentChain=function(){
-         return new ComponentContainer(this.componentsMap);
-    }
-
     /**
      * The function initializes the app based on a package.json file found in the root directory
      * @param cb A callback function that can be used to initialize the app context with some values

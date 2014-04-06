@@ -25,7 +25,11 @@ var app = {};
         this.packMap = {};
         this.componentsMap = new ServiceMap();
         this.context = {};
-        this.components = new ComponentContainer(this.componentsMap);
+        var that=this;
+        Object.defineProperty(this, 'components',{
+            get:function(){ return new ComponentContainer(that.componentsMap);}
+        })
+        //this.components = new ComponentContainer(this.componentsMap);
     }
 
     Fiber.prototype.getNewComponentChain=function(){

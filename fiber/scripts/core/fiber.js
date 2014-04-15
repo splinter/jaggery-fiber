@@ -58,6 +58,16 @@ var app = {};
     };
 
     /**
+     * The function allows an external map of components to be used with
+     * the component map
+     * @param  {[type]} components [description]
+     * @return {[type]}            [description]
+     */
+    Fiber.prototype.external=function(components){
+        this.componentsMap.external(components);
+    };
+
+    /**
      * The function checks if the package.json file is present in the root
      * directory of the application
      */
@@ -224,6 +234,8 @@ var app = {};
      */
     function ServiceMap() {
         this.services = {};
+        this.list=[];
+        this.list.push(this.services);
     }
 
     /**
@@ -247,13 +259,44 @@ var app = {};
      * @param serviceName The name of the service to be instantiated
      * @returns The service function
      */
-    ServiceMap.prototype.get = function (serviceName) {
+    ServiceMap.prototype.get = function (componentName) {
+
+        var components;
+
+        //Go backwards through the list and attempt to find the right component
+        //The rational here is that components should be first loaded from externals
+        /*for(var index=this.list.length-1;index>0;index++){
+            components=this.list[index];
+
+            //Return the first occurence of the component
+            if(components.hasOwnProperty(componentName)){
+                return components[componentName].source;
+            }
+        }*/
+
         //Check if the service exists
-        if (!this.services.hasOwnProperty(serviceName)) {
+        if (!this.services.hasOwnProperty(componentName)) {
             return null;
         }
 
-        return this.services[serviceName].source;
+        return this.services[componentName].source;
+    };
+
+/**
+ * The function allows an external ComponentMap to be plugged in
+ * @param  {[type]} components [description]
+ * @return {[type]}            [description]
+ */
+    ServiceMap.prototype.external=function(components){
+        this.list.push(components);
+    };
+
+    /**
+     * The function returns the list of components omitting the extenerals
+     * @return {[type]} [description]
+     */
+    ServiceMap.prototype.map=function(){
+        return this.services;
     };
 
 
